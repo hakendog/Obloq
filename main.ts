@@ -446,6 +446,11 @@ namespace Obloq_http {
         else
             basic.showIcon(IconNames.No)
     }
+	
+	//% weight=92 group="03_ThingSpeak"
+    //% blockId=saveToThingSpeak blockGap=5
+    //% expandableArgumentMode"toggle" inlineInputMode=inline
+    //% block="send data to ThingSpeak :| write key: %myKey "
 	export function saveToEasyIoT(myKey: string, myssy: string): void {
         Obloq_serial_init()
         basic.showLeds(`
