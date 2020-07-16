@@ -446,4 +446,25 @@ namespace Obloq_http {
         else
             basic.showIcon(IconNames.No)
     }
+	export function saveToEasyIoT(myKey: string, myssy: string): void {
+        Obloq_serial_init()
+        basic.showLeds(`
+        . . . . .
+        . . . . .
+        . # # # .
+        . . . . .
+        . . . . .
+        `)
+        let returnCode=""
+        let myUrl = "http://api.thingspeak.com/update?api_key=" + myKey
+        serial.readString()
+        obloqWriteString("|3|1|" + myUrl + "|\r")
+        for (let i = 0; i < 3; i++) {
+            returnCode = serial.readUntil("|")
+        }
+        if (returnCode == "200")
+            basic.showIcon(IconNames.Yes)
+        else
+            basic.showIcon(IconNames.No)
+    }
 }
