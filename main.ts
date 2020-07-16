@@ -447,11 +447,11 @@ namespace Obloq_http {
             basic.showIcon(IconNames.No)
     }
 	
-	//% weight=92 group="03_ThingSpeak"
-    //% blockId=saveToThingSpeak blockGap=5
+	//% weight=92 group="05_EasyIoT"
+    //% blockId=saveToEasyIoT blockGap=5
     //% expandableArgumentMode"toggle" inlineInputMode=inline
-    //% block="send data to ThingSpeak :| write key: %myKey "
-	export function saveToEasyIoT(myKey: string, myssy: string): void {
+    //% block="send data to EasyIoT :| topic: %topic|id: %iname|password: %ipwd|message: %msg"
+	export function saveToEasyIoT(topic: string, iname: string, ipwd: string, msg: string): void {
         Obloq_serial_init()
         basic.showLeds(`
         . . . . .
@@ -461,7 +461,8 @@ namespace Obloq_http {
         . . . . .
         `)
         let returnCode=""
-        let myUrl = "http://api.thingspeak.com/update?api_key=" + myKey
+        let myUrl = "http://iot.dfrobot.com:3001/apiv2/publish?topic="+topic+"&iname="+iname+"&ipwd="+ipwd+"&msg="+msg
+        
         serial.readString()
         obloqWriteString("|3|1|" + myUrl + "|\r")
         for (let i = 0; i < 3; i++) {
